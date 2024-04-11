@@ -8,6 +8,7 @@ class Tasks(Base):
     __tablename__ = "tasks"
 
     task_id = Column(Integer, primary_key=True, name='task_id')
+    title = Column(String, nullable=False, name='title')
     description = Column(String, nullable=False, name='description')
     date = Column(DateTime, nullable=False, name='date')
 

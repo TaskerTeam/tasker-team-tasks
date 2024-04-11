@@ -5,3 +5,10 @@ greenlet==3.0.3
 psycopg2==2.9.9
 SQLAlchemy==2.0.29
 typing_extensions==4.11.0
+greenlet==3.0.3
+grpcio==1.62.1
+grpcio-tools==1.62.1
+protobuf==4.25.3
+psycopg2==2.9.9
+SQLAlchemy==2.0.29
+typing_extensions==4.11.0
