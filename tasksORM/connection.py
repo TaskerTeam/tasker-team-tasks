@@ -1,9 +1,19 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# .env
+dotenv_path = os.path.dirname(__file__) + '/dotenv_files/.env'
+load_dotenv(dotenv_path)
+
 class DatabaseEngine:
     def __init__(self):
-        self.__connection_string = 'postgresql+psycopg2://postgres:r17arafa@localhost:5432/notas'
+        self.__connection_string = os.environ.get("DATABASE_URL")
         self.__engine = self.__create_database_engine()
         self.session = None
 

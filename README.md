@@ -16,11 +16,20 @@ Após configurar o banco de dados, execute o seguinte comando SQL para criar a t
 
 ```sql
 
+-- Criação da tabela 'task_status'
+CREATE TABLE task_status (
+    status_id SERIAL PRIMARY KEY,
+    status_name VARCHAR NOT NULL
+);
+
+-- Criação da tabela 'tasks'
 CREATE TABLE tasks (
     task_id SERIAL PRIMARY KEY,
     title VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
-    date TIMESTAMP WITHOUT TIME ZONE NOT NULL
+    date TIMESTAMP NOT NULL,
+    status_id INTEGER NOT NULL,
+    FOREIGN KEY (status_id) REFERENCES task_status(status_id)
 );
 ```
 
@@ -28,7 +37,7 @@ Esta tabela será usada para armazenar as tarefas do projeto.
 
 ## Configurar a Conexão no Projeto
 
-No arquivo tasksORM/connection.py, altere a URL de conexão para o banco de dados PostgreSQL para refletir suas credenciais e detalhes de conexão. 
+No arquivo dotenv_files, altere a URL de conexão para o banco de dados PostgreSQL para refletir suas credenciais e detalhes de conexão. 
 
 A URL padrão é a seguinte:
 
@@ -69,7 +78,8 @@ Para inserir uma nova tarefa, envie o seguinte JSON para a API:
   "task": {
     "title": "Nova Tarefa Inserida",
     "description": "Descrição da nova tarefa inserida",
-    "date": "2026-05-20 13:30:00"
+    "date": "2026-05-20 13:30:00",
+    "status_id": 2
   }
 }
 ```
@@ -91,3 +101,10 @@ Para atualizar uma tarefa existente, envie o seguinte JSON para a API:
 
 Atenção: seguir padrão de data `"2026-05-20 13:30:00"`
 
+## Exemplo Buscar status pelo nome
+
+```json
+{
+	"status_name": "concluido"
+}
+```

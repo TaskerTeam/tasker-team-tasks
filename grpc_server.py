@@ -9,6 +9,18 @@ import status_pb2_grpc
 from tasksORM.operations import TasksOperator, StatusTaskOperator
 from utils.date import DateTimeUtils
 
+import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# .env
+dotenv_path = os.path.dirname(__file__) + '/dotenv_files/.env'
+load_dotenv(dotenv_path)
+PORT = int(os.environ.get("PORT", 50051))
+
+
 class StatusTaskService(status_pb2_grpc.TasksServicer):
     def __init__(self):
         self.status_operator = StatusTaskOperator()
@@ -322,10 +334,10 @@ def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     tasks_pb2_grpc.add_TasksServicer_to_server(TasksServicer(), server)
     status_pb2_grpc.add_TasksServicer_to_server(StatusTaskService(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port(f'[::]:{PORT}')
     server.start()
     server.wait_for_termination()
 
 if __name__ == '__main__':
-    print(f'Starting server in: localhost:50051')
+    print(f'Starting server in: localhost:{PORT}')
     serve()
