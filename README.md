@@ -8,7 +8,9 @@ Antes de executar o projeto, é necessário configurar um banco de dados Postgre
 Siga as instruções abaixo para configurar o banco de dados e configurar a conexão no projeto.
 
 
-**CREATE DATABASE notas**
+```sql
+CREATE DATABASE notas
+```
 
 Criação da Tabela
 
