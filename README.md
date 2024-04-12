@@ -39,7 +39,9 @@ Esta tabela será usada para armazenar as tarefas do projeto.
 
 ## Configurar a Conexão no Projeto
 
-No arquivo dotenv_files, altere a URL de conexão para o banco de dados PostgreSQL para refletir suas credenciais e detalhes de conexão. 
+Na pasta dotenv_files/ copie o arquivo .env_exemple e renomeie para .env
+
+No arquivo dotenv_files/.env, altere a URL de conexão para o banco de dados PostgreSQL para refletir suas credenciais e detalhes de conexão. 
 
 A URL padrão é a seguinte:
 
