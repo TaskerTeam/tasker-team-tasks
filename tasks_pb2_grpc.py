@@ -39,6 +39,11 @@ class TasksStub(object):
                 request_serializer=tasks__pb2.DeleteTaskRequest.SerializeToString,
                 response_deserializer=tasks__pb2.DeleteTaskResponse.FromString,
                 )
+        self.GetTasksByStatus = channel.unary_unary(
+                '/tasks.Tasks/GetTasksByStatus',
+                request_serializer=tasks__pb2.GetTasksByStatusRequest.SerializeToString,
+                response_deserializer=tasks__pb2.GetTasksByStatusResponse.FromString,
+                )
 
 
 class TasksServicer(object):
@@ -74,6 +79,12 @@ class TasksServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetTasksByStatus(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_TasksServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -101,6 +112,11 @@ def add_TasksServicer_to_server(servicer, server):
                     servicer.DeleteTask,
                     request_deserializer=tasks__pb2.DeleteTaskRequest.FromString,
                     response_serializer=tasks__pb2.DeleteTaskResponse.SerializeToString,
+            ),
+            'GetTasksByStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTasksByStatus,
+                    request_deserializer=tasks__pb2.GetTasksByStatusRequest.FromString,
+                    response_serializer=tasks__pb2.GetTasksByStatusResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -194,5 +210,22 @@ class Tasks(object):
         return grpc.experimental.unary_unary(request, target, '/tasks.Tasks/DeleteTask',
             tasks__pb2.DeleteTaskRequest.SerializeToString,
             tasks__pb2.DeleteTaskResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetTasksByStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tasks.Tasks/GetTasksByStatus',
+            tasks__pb2.GetTasksByStatusRequest.SerializeToString,
+            tasks__pb2.GetTasksByStatusResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

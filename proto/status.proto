@@ -1,0 +1,61 @@
+syntax = "proto3";
+package status;
+
+service Tasks {
+    rpc GetStatus (GetStatusRequest) returns (GetStatusResponse);
+    rpc GetStatusById (GetStatusByIdRequest) returns (GetStatusByIdResponse);
+    rpc GetStatusByName (GetStatusByNameRequest) returns (GetStatusByNameResponse);
+    rpc CreatStatus (CreateStatusRequest) returns (CreateStatusResponse);
+    rpc UpdatStatus (UpdateStatusRequest) returns (UpdateStatusResponse);
+    rpc DeletStatus (DeleteStatusRequest) returns (DeleteStatusResponse);
+}
+
+message TaskStatus {
+  int32 status_id = 1;
+  string status_name = 2;
+}
+
+message GetStatusRequest {
+}
+
+message GetStatusResponse {
+  repeated TaskStatus status = 1;
+}
+
+message GetStatusByIdRequest {
+    int32 status_id = 1;
+}
+  
+message GetStatusByIdResponse {
+    TaskStatus status = 1;
+}
+
+message GetStatusByNameRequest {
+    string status_name = 1;
+}
+
+message GetStatusByNameResponse {
+    TaskStatus status = 1;
+}
+
+message CreateStatusRequest {
+  TaskStatus status = 1;
+}
+
+message CreateStatusResponse {
+  int32 status_id = 1;
+}
+
+message UpdateStatusRequest {
+  TaskStatus status = 1;
+}
+
+message UpdateStatusResponse {
+}
+
+message DeleteStatusRequest {
+  int32 status_id = 1;
+}
+
+message DeleteStatusResponse {
+}

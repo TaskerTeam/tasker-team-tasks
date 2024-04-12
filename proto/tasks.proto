@@ -7,6 +7,7 @@ service Tasks {
     rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
     rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskResponse);
     rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
+    rpc GetTasksByStatus (GetTasksByStatusRequest) returns (GetTasksByStatusResponse);
 }
 
 message Task {
@@ -14,6 +15,7 @@ message Task {
   string title = 2;
   string description = 3;
   string date = 4;
+  int32 status_id = 5;
 }
 
 message GetTasksRequest {
@@ -51,4 +53,12 @@ message DeleteTaskRequest {
 }
 
 message DeleteTaskResponse {
+}
+
+message GetTasksByStatusRequest {
+  string status_name = 1;
+}
+
+message GetTasksByStatusResponse {
+  repeated Task tasks = 1;
 }
